@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 use League\Tactician\CommandBus;
 use Services\User\Commands\CreateUserCommand;
+use Services\User\Commands\LoginUserCommand;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
@@ -17,6 +19,7 @@ class AuthController extends Controller
     public function __construct(CommandBus $bus)
     {
         $this->bus = $bus;
+        $this->middleware('auth', ['except' => ['login']]);
     }
     /**
      * Store a new user.
@@ -73,18 +76,24 @@ class AuthController extends Controller
      * @return Response
      */
     public function login(Request $request){
-        $this->validate($request, [
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ]);
+        // $this->validate($request, [
+        //     'email' => 'required|string',
+        //     'password' => 'required|string',
+        // ]);
 
-        $credentials = $request->only(['email', 'password']);
+        // $credentials = $request->only(['email', 'password']);
 
-        if (! $token = Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Wrong email and password combination'], 401);
+        // if (! $token = Auth::attempt($credentials)) {
+        //     return response()->json(['message' => 'Wrong email and password combination'], 401);
+        // }
+
+        // return $this->respondWithToken($token);
+        $command = new LoginUserCommand($request->get('email'), $request->get('password'));
+        $result = $this->bus->handle($command);
+        if ($result) {
+          return new JsonResponse($result, 201);
         }
-
-        return $this->respondWithToken($token);
+        return new JsonResponse(['error' => 'Invalid request'], 400);
     }
 
     

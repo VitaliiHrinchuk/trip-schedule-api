@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/register', [
+# ------------- AUTH -------------
+$router->post('/login', [
+  'uses' => 'AuthController@login',
+]);
+
+$router->post('/register', [
+  'middleware' => ['auth'],
   'uses' => 'AuthController@register',
 ]);
+
