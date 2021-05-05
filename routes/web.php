@@ -25,6 +25,9 @@ $router->post('/register', [
 $router->post('/cities/bulk', [
   'uses' => 'CityController@store',
 ]);
+$router->get('/cities', [
+  'uses' => 'CityController@index',
+]);
 
 # ------------- COMPANY -------------
 $router->post('/companies', [
@@ -58,4 +61,41 @@ $router->put('/transport-type/{uuid}', [
 $router->delete('/transport-type/{uuid}', [
   'middleware' => ['auth'],
   'uses' => 'TransportTypeController@destroy',
+]);
+
+# ------------- TRANSPORT -------------
+$router->post('/transport', [
+  'middleware' => ['auth'],
+  'uses' => 'TransportController@store',
+]);
+$router->get('/transport/{uuid}', [
+  'uses' => 'TransportController@show',
+]);
+$router->put('/transport/{uuid}', [
+  'middleware' => ['auth'],
+  'uses' => 'TransportController@update',
+]);
+$router->delete('/transport/{uuid}', [
+  'middleware' => ['auth'],
+  'uses' => 'TransportController@destroy',
+]);
+
+# ------------- TRIP -------------
+$router->post('/trip', [
+  'middleware' => ['auth'],
+  'uses' => 'TripController@store',
+]);
+$router->get('/trip/{uuid}', [
+  'uses' => 'TripController@show',
+]);
+$router->get('/trip', [
+  'uses' => 'TripController@index',
+]);
+$router->put('/trip/{uuid}', [
+  'middleware' => ['auth'],
+  'uses' => 'TripController@update',
+]);
+$router->delete('/trip/{uuid}', [
+  'middleware' => ['auth'],
+  'uses' => 'TripController@destroy',
 ]);

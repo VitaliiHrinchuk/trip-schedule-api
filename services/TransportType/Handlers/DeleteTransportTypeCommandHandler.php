@@ -14,9 +14,9 @@ class DeleteTransportTypeCommandHandler{
   }
   public function handle(DeleteTransportTypeCommand $command) {
       $this->validate($command);
-      $company = TransportType::where('uuid', $command->uuid)->firstOrFail();
+      $type = TransportType::where('uuid', $command->uuid)->firstOrFail();
 
-      return $company->delete();
+      return $type->delete();
   } 
 
   protected function validate(DeleteTransportTypeCommand $command) {

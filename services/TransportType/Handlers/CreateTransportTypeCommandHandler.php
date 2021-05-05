@@ -15,11 +15,11 @@ class CreateTransportTypeCommandHandler{
   public function handle(CreateTransportTypeCommand $command) {
       $this->validate($command);
 
-      $company = new TransportType();
-      $company->uuid = (string) \Illuminate\Support\Str::uuid();
-      $company->slug = $command->slug;
+      $type = new TransportType();
+      $type->uuid = (string) \Illuminate\Support\Str::uuid();
+      $type->slug = $type->slug;
 
-      return $company->save() ? $company : [] ;
+      return $type->save() ? $type : [] ;
   } 
 
   protected function validate(CreateTransportTypeCommand $command) {

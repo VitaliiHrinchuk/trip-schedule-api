@@ -15,11 +15,11 @@ class UpdateTransportTypeCommandHandler{
   public function handle(UpdateTransportTypeCommand $command) {
       $this->validate($command);
 
-      $company = TransportType::where('uuid', $command->uuid)->firstOrFail();
-      $company->slug = $command->slug;
+      $type = TransportType::where('uuid', $command->uuid)->firstOrFail();
+      $type->slug = $command->slug;
 
       
-      return $company->save() ? $company : [] ;
+      return $type->save() ? $type : [] ;
   } 
 
   protected function validate(UpdateTransportTypeCommand $command) {
