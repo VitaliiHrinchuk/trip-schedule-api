@@ -21,3 +21,24 @@ $router->post('/register', [
   'uses' => 'AuthController@register',
 ]);
 
+# ------------- CITY -------------
+$router->post('/cities/bulk', [
+  'uses' => 'CityController@store',
+]);
+
+# ------------- COMPANY -------------
+$router->post('/companies', [
+  'middleware' => ['auth'],
+  'uses' => 'CompanyController@store',
+]);
+$router->get('/companies/{uuid}', [
+  'uses' => 'CompanyController@show',
+]);
+$router->put('/companies/{uuid}', [
+  'middleware' => ['auth'],
+  'uses' => 'CompanyController@update',
+]);
+$router->delete('/companies/{uuid}', [
+  'middleware' => ['auth'],
+  'uses' => 'CompanyController@destroy',
+]);
