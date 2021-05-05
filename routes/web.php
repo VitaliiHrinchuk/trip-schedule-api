@@ -42,3 +42,20 @@ $router->delete('/companies/{uuid}', [
   'middleware' => ['auth'],
   'uses' => 'CompanyController@destroy',
 ]);
+
+# ------------- TRANSPORT TYPE -------------
+$router->post('/transport-type', [
+  'middleware' => ['auth'],
+  'uses' => 'TransportTypeController@store',
+]);
+$router->get('/transport-type/{uuid}', [
+  'uses' => 'TransportTypeController@show',
+]);
+$router->put('/transport-type/{uuid}', [
+  'middleware' => ['auth'],
+  'uses' => 'TransportTypeController@update',
+]);
+$router->delete('/transport-type/{uuid}', [
+  'middleware' => ['auth'],
+  'uses' => 'TransportTypeController@destroy',
+]);
