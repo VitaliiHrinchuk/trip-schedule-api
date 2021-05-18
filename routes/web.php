@@ -34,6 +34,9 @@ $router->post('/companies', [
   'middleware' => ['auth'],
   'uses' => 'CompanyController@store',
 ]);
+$router->get('/companies', [
+  'uses' => 'CompanyController@index',
+]);
 $router->get('/companies/{uuid}', [
   'uses' => 'CompanyController@show',
 ]);
@@ -51,6 +54,9 @@ $router->post('/transport-type', [
   'middleware' => ['auth'],
   'uses' => 'TransportTypeController@store',
 ]);
+$router->get('/transport-type', [
+  'uses' => 'TransportTypeController@index',
+]);
 $router->get('/transport-type/{uuid}', [
   'uses' => 'TransportTypeController@show',
 ]);
@@ -64,6 +70,9 @@ $router->delete('/transport-type/{uuid}', [
 ]);
 
 # ------------- TRANSPORT -------------
+$router->get('/transport', [
+  'uses' => 'TransportController@index',
+]);
 $router->post('/transport', [
   'middleware' => ['auth'],
   'uses' => 'TransportController@store',

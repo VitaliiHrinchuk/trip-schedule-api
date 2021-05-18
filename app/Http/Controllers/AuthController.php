@@ -19,7 +19,6 @@ class AuthController extends Controller
     public function __construct(CommandBus $bus)
     {
         $this->bus = $bus;
-        $this->middleware('auth', ['except' => ['login']]);
     }
     /**
      * Store a new user.

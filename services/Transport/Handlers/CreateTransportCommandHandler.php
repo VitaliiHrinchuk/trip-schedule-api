@@ -29,7 +29,6 @@ class CreateTransportCommandHandler{
     $rules = [
       'name' => ['required', 'string'],
       'type_uuid' => ['required', 'uuid'],
-      'model' => ['string'],
     ];
 
     $validator = $this->validator->make($command->toArray(), $rules);

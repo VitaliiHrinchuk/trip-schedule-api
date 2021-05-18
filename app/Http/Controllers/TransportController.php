@@ -11,6 +11,7 @@ use Services\Transport\Commands\CreateTransportCommand;
 use Services\Transport\Commands\ShowTransportCommand;
 use Services\Transport\Commands\DeleteTransportCommand;
 use Services\Transport\Commands\UpdateTransportCommand;
+use Services\Transport\Commands\ListQueryTransportCommand;
 use Illuminate\Http\JsonResponse;
 
 class TransportController extends Controller
@@ -20,6 +21,16 @@ class TransportController extends Controller
 
     public function __construct(CommandBus $bus) {
         $this->bus = $bus;
+    }
+
+    public function index(Request $request){
+      
+      $command = new ListQueryTransportCommand();
+      $result = $this->bus->handle($command);
+      if ($result) {
+        return new JsonResponse($result, 200);
+      }
+      return new JsonResponse(['error' => 'Invalid request'], 400);
     }
 
     public function store(Request $request){

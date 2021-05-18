@@ -17,7 +17,7 @@ class CreateTransportTypeCommandHandler{
 
       $type = new TransportType();
       $type->uuid = (string) \Illuminate\Support\Str::uuid();
-      $type->slug = $type->slug;
+      $type->slug = $command->slug;
 
       return $type->save() ? $type : [] ;
   } 

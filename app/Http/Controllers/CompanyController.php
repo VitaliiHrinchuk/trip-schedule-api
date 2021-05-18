@@ -11,6 +11,7 @@ use Services\Company\Commands\CreateCompanyCommand;
 use Services\Company\Commands\ShowCompanyCommand;
 use Services\Company\Commands\DeleteCompanyCommand;
 use Services\Company\Commands\UpdateCompanyCommand;
+use Services\Company\Commands\ListQueryCompanyCommand;
 use Illuminate\Http\JsonResponse;
 
 class CompanyController extends Controller
@@ -20,6 +21,16 @@ class CompanyController extends Controller
 
     public function __construct(CommandBus $bus) {
         $this->bus = $bus;
+    }
+
+    public function index(Request $request){
+      
+      $command = new ListQueryCompanyCommand();
+      $result = $this->bus->handle($command);
+      if ($result) {
+        return new JsonResponse($result, 200);
+      }
+      return new JsonResponse(['error' => 'Invalid request'], 400);
     }
 
     public function store(Request $request){

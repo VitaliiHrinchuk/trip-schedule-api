@@ -29,7 +29,7 @@ class UpdateTransportCommandHandler{
     $rules = [
       'name' => ['required', 'string'],
       'type_uuid' => ['required', 'uuid'],
-      'model' => ['string'],
+  
       'uuid' => ['required']
     ];  
 

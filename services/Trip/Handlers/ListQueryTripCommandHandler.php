@@ -11,7 +11,7 @@ class ListQueryTripCommandHandler{
 
   }
   public function handle(ListQueryTripCommand $command) {
-      return Trip::with('departureCity', 'arrivalCity', 'transport', 'company')
+      return Trip::with('departureCity', 'arrivalCity', 'transport', 'transport.type', 'company')
                   ->paginate();
   } 
 

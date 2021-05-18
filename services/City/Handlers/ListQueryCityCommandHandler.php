@@ -11,7 +11,7 @@ class ListQueryCityCommandHandler{
 
   }
   public function handle(ListQueryCityCommand $command) {
-      return City::paginate();
+      return City::all();
   } 
 
   
