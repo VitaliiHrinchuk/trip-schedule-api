@@ -19,7 +19,7 @@ class LoginUserCommandHandler{
       $this->validate($command);
     
       if (! $token = Auth::attempt($command->toArray())) {
-          throw ValidationException::withMessages(['login' => 'Wrong email and password combination']);
+          throw ValidationException::withMessages(['login' => 'Невірна комбінація логіна і паролю']);
       }
 
       return ["access_token" => $token];

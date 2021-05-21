@@ -25,7 +25,7 @@ class TripController extends Controller
 
     public function index(Request $request){
       
-      $command = new ListQueryTripCommand();
+      $command = new ListQueryTripCommand($request->query());
       $result = $this->bus->handle($command);
       if ($result) {
         return new JsonResponse($result, 200);

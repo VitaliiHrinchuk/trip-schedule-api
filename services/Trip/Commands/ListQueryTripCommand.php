@@ -3,8 +3,10 @@ namespace Services\Trip\Commands;
 
 class ListQueryTripCommand {
 
-  public function __construct(){
+  public $query;
 
+  public function __construct(?array $query){
+    $this->query = $query;
   }
 
   public function toArray(){
